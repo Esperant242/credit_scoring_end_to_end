@@ -1,0 +1,73 @@
+# Configuration des features pour le scoring de crédit
+
+# Colonnes numériques continues
+numerical_features:
+  - age
+  - income
+  - debt_ratio
+  - monthly_income
+  - credit_utilization
+  - payment_history_length
+  - number_of_credit_cards
+  - loan_amount
+  - loan_term
+
+# Colonnes numériques discrètes
+discrete_features:
+  - number_of_dependents
+  - number_of_open_accounts
+  - number_of_credit_inquiries
+  - months_employed
+
+# Colonnes catégorielles
+categorical_features:
+  - employment_status
+  - education_level
+  - marital_status
+  - home_ownership
+  - loan_purpose
+  - credit_history_length
+
+# Colonnes à discrétiser (transformation en catégories)
+features_to_discretize:
+  age:
+    bins: [18, 25, 35, 45, 55, 65, 100]
+    labels: ["18-25", "26-35", "36-45", "46-55", "56-65", "65+"]
+  
+  income:
+    bins: [0, 25000, 50000, 75000, 100000, 150000, 1000000]
+    labels: ["0-25k", "25k-50k", "50k-75k", "75k-100k", "100k-150k", "150k+"]
+
+# Colonnes à ignorer
+ignore_features:
+  - id
+  - customer_id
+  - application_date
+  - timestamp
+
+# Colonne cible
+target_column: default_status
+
+# Paramètres de preprocessing
+preprocessing:
+  # Imputation
+  numerical_imputation: "median"
+  categorical_imputation: "mode"
+  
+  # Outliers
+  outlier_method: "iqr"
+  outlier_threshold: 1.5
+  
+  # Scaling
+  scaling_method: "robust"
+  
+  # Encoding
+  categorical_encoding: "target_encoding"
+  
+  # Validation
+  validation_split: 0.15
+  test_split: 0.15
+  random_state: 42
+
+
+
